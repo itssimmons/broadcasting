@@ -1,0 +1,40 @@
+.headerChat {
+  height: 100px;
+  position: relative;
+  z-index: var(--on-top);
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-auto-columns: max-content max-content 1fr max-content;
+  background: white;
+  padding-inline: 12px;
+  box-shadow: 0px 1px 40px -8px rgb(0 0 0 / 10%);
+}
+
+.receiverNames {
+  line-height: 1.1;
+}
+.receiverNames p {
+  font-size: 0.75rem;
+}
+
+.receiverPic {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #e7e7e7;
+  border-radius: 100%;
+  margin-inline: 12px;
+} 
+
+.receiverPic img {
+	width: 34px;
+	height: auto;
+} 
+
+.callButtons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

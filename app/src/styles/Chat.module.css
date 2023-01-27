@@ -1,0 +1,79 @@
+.chat {
+	display: flex;
+	flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: var(--on-below);
+	height: calc(100% - 100px - 80px);
+	width: 100%;
+	background: white;
+	padding-bottom: 26px;
+	gap: 20px;
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.photo {
+  width: 40px;
+  height: 40px;
+  background: #e7e7e7;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+.myMsg .user {
+	justify-content: flex-end;
+}
+.yourMsg .user {
+	justify-content: flex-start;
+}
+
+.myMsg,
+.yourMsg {
+	max-width: 90%;
+	min-width: 60%;
+	height: max-content;
+}
+
+.myMsg {
+	margin-left: auto;
+	margin-right: 12px;
+}
+
+.yourMsg {
+	margin-left: 12px;
+	margin-right: auto;
+}
+
+.message {
+	font-size: 0.875rem;
+	font-weight: 600;
+	padding: 12px;
+}
+.myMsg .message {
+	border-radius: 8px 0px 8px 8px;
+	background: #ffd1da;
+}
+.yourMsg .message {
+	border-radius: 0px 8px 8px 8px;
+	background: #f1f1f1;
+	margin-left: calc(40px + 10px);
+}
+
+.myMsg .user .msgInfo {
+	flex-direction: row-reverse;
+}
+.msgInfo {
+	display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.msgInfo p {
+	font-size: 0.75rem;
+}
