@@ -9184,6 +9184,11 @@ workbox-window@6.5.4:
     "@types/trusted-types" "^2.0.2"
     workbox-core "6.5.4"
 
+wouter@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/wouter/-/wouter-2.9.2.tgz#30cc995a99d9cbdd08a965b5a3ebc0a65811b3be"
+  integrity sha512-OOqhotZYHt/urnKyv8TIxs8D/9h/2dsPdHhM4kKJ2KMbcEIessKUPOTTJ2aSgV+LDoJYlCYV3tT7h+67GYXE3w==
+
 wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"

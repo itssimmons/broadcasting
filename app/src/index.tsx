@@ -1,16 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import UserCtx from './context/UserCtx';
 import App from './App';
 import './index.css';
-
-const emisor = {
-  id: '08c71152',
-  name: 'John',
-  lastName: 'Doe',
-  lastConnection: null
-}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,9 +10,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <UserCtx.Provider value={emisor}>
-      <App />
-    </UserCtx.Provider>
+    <App />
   </React.StrictMode>
 );
 

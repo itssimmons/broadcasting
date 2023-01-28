@@ -4,9 +4,21 @@ export interface Message {
   message: string
 }
 
-interface User {
+export interface User {
   id: string;
   name: string | ''
   lastName: string | ''
   lastConnection: string | null
+}
+
+export type Auth = { user: User, token: string } 
+
+export type UserCtx = {
+  authUser: User | null
+  setAuthUser: (user: User) => void
+}
+
+export type LoginRequest = {
+  [k: string]: FormDataEntryValue
+  phone: string
 }
