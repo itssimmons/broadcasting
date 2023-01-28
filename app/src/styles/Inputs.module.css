@@ -1,0 +1,41 @@
+.input {
+	width: 100%;
+  border-bottom: 2px solid #ff9e94;
+}
+
+.input > p {
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: #9d9d9d;
+	text-transform: uppercase;
+}
+
+.field {
+	display: flex;
+	align-items: center;
+}
+
+.field input {
+	padding: 10px 20px 6px 10px;
+	border: none;
+	font-size: 1rem;
+	font-weight: 600;
+	color: #474747;
+}
+
+.btn {
+	border: none;
+	background: none;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	width: 220px;
+  height: 55px;
+	border-radius: 100px;
+	font-weight: 700;
+	font-size: 0.875rem;
+	color: white;
+	background-color: rgb(255 163 149);
+	background-image: linear-gradient(90deg, #ffa395 0%, #ff7893 55%, #ff98ab 100%);
+	box-shadow: 16px 10px 33px -8px rgba(252, 63, 113, 0.38);
+}

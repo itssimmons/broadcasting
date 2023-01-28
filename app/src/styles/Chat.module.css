@@ -25,10 +25,11 @@
   place-items: center;
   border-radius: 100%;
 	text-transform: uppercase;
-	font-weight: 800;
+	font-weight: 700;
 }
 .myMsg .user {
 	justify-content: flex-end;
+	margin-bottom: 5px;
 }
 .yourMsg .user {
 	justify-content: flex-start;
@@ -53,7 +54,7 @@
 
 .message {
 	font-size: 0.875rem;
-	font-weight: 600;
+	font-weight: 500;
 	padding: 12px;
 }
 .myMsg .message {
@@ -64,6 +65,7 @@
 	border-radius: 0px 8px 8px 8px;
 	background: #f1f1f1;
 	margin-left: calc(40px + 10px);
+	margin-top: -5px;
 }
 
 .myMsg .user .msgInfo {

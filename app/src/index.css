@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
 
 :root {
   --ios-width: 428px;
@@ -6,7 +6,6 @@
   --on-below: 9;
 }
 
-p, h3 { color: #353535; }
 *:focus { outline: none; }
 
 *,
@@ -14,12 +13,12 @@ p, h3 { color: #353535; }
 *::before {
   margin: 0;
   padding: 0;
+  font-family: 'Inter', sans-serif;
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #FF9A8B;

@@ -27,7 +27,7 @@ export default ({ receiver }: any) => {
 	return (
 		<header className={styles.headerChat}>
 			<Back onClick={handleBack} />
-			<ReceiverPicture src="/assets/3972389.webp" />
+			<ReceiverPicture src="/assets/3972387.webp" />
 			<section className={styles.receiverNames}>
 				<h3>{receiver.name} {receiver.lastName}</h3>
 				<p>{dayjs(receiver.lastConnection).fromNow()}</p>

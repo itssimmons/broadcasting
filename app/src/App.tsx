@@ -1,79 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserCtx from './context/UserCtx';
-import Chat from './components/Chat';
-import Header from './components/Header';
-import MessageArea from './components/MessageArea';
-import Screen from './components/Screen';
-import KeyCode from './helpers/KeyCode';
-import type { Message, User } from './types'
-import './App.css';
+import React, { useState } from "react"
+import { Route, Switch, Redirect, Router } from "wouter"
+import UserCtx from "./context/UserCtx"
+import LoginView from "./views/Login.view"
+import ChatView from "./views/Chat.view"
+import type { RouteProps } from "wouter"
+import type { Auth, User } from "./types"
 
-const receiver: User = {
-  id: 'af7c1fe6',
-  name: 'Broadcaster',
-  lastName: '',
-  lastConnection: 'Fri Jan 27 2023 14:12:48'
-} 
+const PrivateRoute = ({ path }: RouteProps) => {
+  const [authUser, setAuthUser] = useState<User | null>(null)
 
-const user: User = {
-  id: '08c71152',
-  name: 'John',
-  lastName: 'Doe',
-  lastConnection: null
-}
-
-const testingMsgs: Message[] = [
-  {
-    emisor: receiver,
-    receiver: user,
-    message: 'Lorem ipsum dolor sit'
-  },
-  {
-    emisor: user,
-    receiver: receiver,
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  }
-]
-
-function App() {
-  const user = useContext(UserCtx) as User
-  const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
-
-  useEffect(() => {
-    setMessages(messages => ([
-      ...messages,
-      {
-        receiver: receiver,
-        emisor: user,
-        message
-      }
-    ]))
-  }, [])
-
-  const handleSend = (e: any) => {
-    const callback = () => {
-      console.log('sending msg...')
-    }
-
-    if (e.nativeEvent instanceof KeyboardEvent)
-      if (e.which === KeyCode.Enter)
-        callback()
-
-    if (e.nativeEvent instanceof PointerEvent)
-      callback()
-  }
+  if (!authUser) return <Redirect to="/login" />
 
   return (
-    <Screen>
-      <Header receiver={receiver} />
-      <Chat messages={testingMsgs} />
-      <MessageArea
-        setMessage={setMessage}
-        onSend={handleSend}
-      />
-    </Screen>
-  );
+    <Route path={path}>
+      <Route path="/chat" component={ChatView} />
+    </Route>
+  )
 }
 
-export default App;
+const App = () => {
+  const [authUser, setAuthUser] = useState<User | null>(null)
+
+  React.useEffect(() => {
+    const authStored = localStorage.getItem('auth')
+    const lastAuth: Auth | null = authStored ? JSON.parse(authStored) : null;
+
+    setAuthUser(lastAuth ? lastAuth.user : null)
+  }, [])
+
+  const value = React.useMemo(() => ({
+    authUser,
+    setAuthUser
+  }), [authUser]);
+
+
+  return (
+    <UserCtx.Provider value={value}>
+      <Router>
+        <Switch>
+          <PrivateRoute path="/" />
+          <Route path="/login" component={LoginView} />
+        </Switch>
+      </Router>
+    </UserCtx.Provider>
+  )
+}
+
+export default App

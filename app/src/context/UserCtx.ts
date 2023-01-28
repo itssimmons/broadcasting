@@ -1,4 +1,4 @@
 import React, { createContext } from "react";
-import { User } from "../types";
+import type { User, UserCtx } from "../types";
 
-export default createContext<User | {}>({}) // auth user always is the emisor
+export default createContext<UserCtx>({} as UserCtx)
