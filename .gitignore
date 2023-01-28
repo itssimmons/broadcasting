@@ -21,6 +21,7 @@ yarn-error.log*
 lerna-debug.log*
 node_modules/
 # yarn v2
+**/yarn.lock
 .yarn/cache
 .yarn/unplugged
 .yarn/build-state.yml
