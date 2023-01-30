@@ -1,76 +1,78 @@
 import React, { useContext, useEffect, useState } from 'react';
-import UserCtx from '../context/UserCtx';
-import Chat from '../components/Chat';
-import Header from '../components/Header';
-import MessageArea from '../components/MessageArea';
-import Screen from '../components/Screen';
-import KeyCode from '../helpers/KeyCode';
-import type { Message, User } from '../types'
+import UserCtx from "../context/UserCtx";
+import Chat from "../components/Chat";
+import Header from "../components/Header";
+import MessageArea from "../components/MessageArea";
+import Screen from "../components/Screen";
+import KeyCode from "../helpers/KeyCode";
+import msgServices from "../services/message.services"
+import userServices from "../services/user.services"
+import type { Message, User, XResponse } from '../types'
 
-const receiver: User = {
-  id: 'af7c1fe6',
-  name: 'Broadcaster',
-  lastName: '',
-  lastConnection: 'Fri Jan 27 2023 14:12:48'
-} 
-
-const user: User = {
-  id: '08c71152',
-  name: 'John',
-  lastName: 'Doe',
-  lastConnection: null
-}
-
-const testingMsgs: Message[] = [
-  {
-    emisor: receiver,
-    receiver: user,
-    message: 'Lorem ipsum dolor sit'
-  },
-  {
-    emisor: user,
-    receiver: receiver,
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  }
-]
+const johnId = '3e365095-81ce-4a04-a06b-58c0ba9138ee'
+const broadcasterId = '875f7d06-4920-49db-bd14-7972f1194de4'
 
 export default () => {
   const { authUser: user } = useContext(UserCtx)
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
+  const [receiver, setReceiver] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setMessages(messages => ([
-      ...messages,
-      {
-        receiver: receiver,
+    (async () => {
+      try {
+        setLoading(true)
+        const receiver = await userServices.find(user?.id === johnId ? broadcasterId : johnId) as XResponse<User>
+        const allMessages = await msgServices.all() as XResponse<Message[]>
+
+        setReceiver(receiver.data)
+        setMessages(allMessages.data)
+      } catch {
+        setLoading(false)
+        console.error('Something went wrong :/')
+      } finally {
+        setLoading(false)
+      }
+    })()
+  }, [])
+
+  const handleSend = async (e: any) => {
+    const callback = async () => {
+      const newMessage = {
+        receiver: receiver as User,
         emisor: user!,
         message
       }
-    ]))
-  }, [])
 
-  const handleSend = (e: any) => {
-    const callback = () => {
-      console.info('sending msg...')
+      setMessages(messages => ([
+        ...messages,
+        newMessage
+      ]))
+
+      await msgServices.send(newMessage)
     }
 
     if (e.nativeEvent instanceof KeyboardEvent)
       if (e.which === KeyCode.Enter)
-        callback()
+        await callback()
 
     if (e.nativeEvent instanceof PointerEvent)
-      callback()
+      await callback()
   }
 
-  return (
+  return !loading ? (
     <Screen>
       <Header receiver={receiver} />
-      <Chat messages={testingMsgs} />
+      <Chat messages={messages} />
       <MessageArea
         setMessage={setMessage}
         onSend={handleSend}
       />
     </Screen>
-  );
+  ) : (
+    <Screen>
+      <p>Loading...</p>
+    </Screen>
+  )
 }

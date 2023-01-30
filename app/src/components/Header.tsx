@@ -30,7 +30,7 @@ export default ({ receiver }: any) => {
 			<ReceiverPicture src="/assets/3972387.webp" />
 			<section className={styles.receiverNames}>
 				<h3>{receiver.name} {receiver.lastName}</h3>
-				<p>{dayjs(receiver.lastConnection).fromNow()}</p>
+				<p>{receiver.lastConnection ? dayjs(receiver.lastConnection).fromNow() : 'online'}</p>
 			</section>
 			<section className={styles.callButtons}>
 				<Call onClick={handleCall} />

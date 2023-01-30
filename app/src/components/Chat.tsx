@@ -1,9 +1,10 @@
 import React, { useContext } from "react"
 import UserCtx from "../context/UserCtx"
+import dayjs from "../helpers/dayjs"
 import type { Message, User } from "../types"
 import styles from "../styles/Chat.module.css"
 
-const Message = ({ emisor, message, receiver }: Message) => {
+const Message = ({ emisor, message, receiver, createdAt }: Message) => {
   const { authUser: user } = useContext(UserCtx)
   const isMyMsg = user?.id === emisor.id
 	const emisorPhoto = emisor.name[0]
@@ -14,7 +15,7 @@ const Message = ({ emisor, message, receiver }: Message) => {
 				{!isMyMsg && <span className={styles.photo}>{emisorPhoto}</span>}
 				<div className={styles.msgInfo}>
 					<strong>{isMyMsg ? 'You' : `${emisor.name} ${emisor.lastName}`}</strong>
-					<p>19:43</p>
+					<p>{dayjs(createdAt).format('HH:mm')}</p>
 				</div>
 			</section>
 			<div className={styles.message}>

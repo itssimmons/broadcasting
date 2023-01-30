@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,6 +15,19 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+Route::get('/', function () use ($router) {
     return $router->app->version();
 });
+
+Route::group(
+    [ 'prefix' => 'api' ],
+    function () {
+        Route::post('login', 'AuthController@login');
+        Route::post('logout', 'AuthController@logout');
+
+        Route::get('users/{id}', 'UserController@find');
+
+        Route::get('messages', 'MessageController@all');
+        Route::post('messages', 'MessageController@store');
+    }
+);

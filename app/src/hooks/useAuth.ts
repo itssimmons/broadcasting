@@ -1,26 +1,15 @@
-import React, { useContext } from "react"
-import { useLocation, useRouter } from "wouter";
-import "isomorphic-fetch";
-import UserCtx from "../context/UserCtx"
-import type { AuthData } from "../types";
+import React, { useContext } from "react";
+import { useLocation } from "wouter";
+import UserCtx from "../context/UserCtx";
+import service from "../services/auth.services";
 
 export default () => {
 	const { setAuthUser } = useContext(UserCtx);
-	const [location, navigate] = useLocation()
-
-	const headers = {
-		'Content-Type': 'application/json'
-	}
+	const [_, navigate] = useLocation()
 
 	const login = async (payload: any) => {
 		try {
-			const response = await fetch('http://localhost:8000/api/login', {
-				method: 'post',
-				headers,
-				body: JSON.stringify(payload)
-			})
-
-			const authData: any = response ? await response.json() : null;
+			const authData = await service.login(payload)
 
 			if (!authData?.user) throw new Error('User not found')
 

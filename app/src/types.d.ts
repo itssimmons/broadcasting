@@ -2,13 +2,15 @@ export interface Message {
   receiver: User
   emisor: User
   message: string
+  id?: string
+  createdAt?: string
 }
 
 export interface User {
-  id: string;
   name: string | ''
   lastName: string | ''
   lastConnection: string | null
+  id?: string;
 }
 
 export type Auth = { user: User, token: string } 
@@ -28,4 +30,9 @@ export type AuthData = {
   accessToken: string
   tokenType: string
   expiresIn: number
+}
+
+export type XResponse<M> = {
+  success: boolean
+  data: M
 }

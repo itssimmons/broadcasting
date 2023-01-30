@@ -9,6 +9,7 @@ import type { Auth, User } from "./types"
 const PrivateRouter = () => {
   const { authUser } = useContext(UserCtx)
 
+  if (!authUser) return <Redirect to="/login" />
 
   return (
     <Route path="/chat" component={ChatView} />
@@ -18,6 +19,7 @@ const PrivateRouter = () => {
 const PublicRouter = () => {
   const { authUser } = useContext(UserCtx)
 
+  if (authUser) return <Redirect to="/chat" />
 
   return (
     <Route path="/login" component={LoginView} />
