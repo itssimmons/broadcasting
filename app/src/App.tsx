@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { Route, Switch, Redirect, Router } from "wouter"
+import { Route, Redirect, Router } from "wouter"
 import UserCtx from "./context/UserCtx"
 import LoginView from "./views/Login.view"
 import ChatView from "./views/Chat.view"
