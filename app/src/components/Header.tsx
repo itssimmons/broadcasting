@@ -13,15 +13,15 @@ const ReceiverPicture = ({ src }: any) => {
 
 export default ({ receiver }: any) => {
 	const handleBack = () => {
-		console.log('closing tab...')
+		console.info('closing tab...')
 	}
 
 	const handleCall = () => {
-		console.log('starting a call...')
+		console.info('starting a call...')
 	}
 
 	const handleVideoCall = () => {
-		console.log('starting a video call...')
+		console.info('starting a video call...')
 	}
 
 	return (

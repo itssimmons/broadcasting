@@ -4,12 +4,16 @@ import Screen from "../components/Screen"
 import Input, { Button } from "../components/Inputs"
 import type { LoginRequest } from "../types"
 import styles from "../styles/Login.module.css"
+import useAuth from "../hooks/useAuth"
 
 export default () => {
-	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+	const { login } = useAuth()
+
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault()
-		const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
-		console.log(data)
+		const payload = Object.fromEntries(new FormData(e.target as HTMLFormElement))
+
+		await login(payload)
 	}
 
 	return (

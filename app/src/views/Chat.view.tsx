@@ -52,7 +52,7 @@ export default () => {
 
   const handleSend = (e: any) => {
     const callback = () => {
-      console.log('sending msg...')
+      console.info('sending msg...')
     }
 
     if (e.nativeEvent instanceof KeyboardEvent)

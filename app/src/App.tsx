@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Route, Switch, Redirect, Router } from "wouter"
 import UserCtx from "./context/UserCtx"
 import LoginView from "./views/Login.view"
@@ -6,15 +6,21 @@ import ChatView from "./views/Chat.view"
 import type { RouteProps } from "wouter"
 import type { Auth, User } from "./types"
 
-const PrivateRoute = ({ path }: RouteProps) => {
-  const [authUser, setAuthUser] = useState<User | null>(null)
+const PrivateRouter = () => {
+  const { authUser } = useContext(UserCtx)
 
-  if (!authUser) return <Redirect to="/login" />
 
   return (
-    <Route path={path}>
-      <Route path="/chat" component={ChatView} />
-    </Route>
+    <Route path="/chat" component={ChatView} />
+  )
+}
+
+const PublicRouter = () => {
+  const { authUser } = useContext(UserCtx)
+
+
+  return (
+    <Route path="/login" component={LoginView} />
   )
 }
 
@@ -33,14 +39,11 @@ const App = () => {
     setAuthUser
   }), [authUser]);
 
-
   return (
     <UserCtx.Provider value={value}>
       <Router>
-        <Switch>
-          <PrivateRoute path="/" />
-          <Route path="/login" component={LoginView} />
-        </Switch>
+        <PrivateRouter />
+        <PublicRouter />
       </Router>
     </UserCtx.Provider>
   )

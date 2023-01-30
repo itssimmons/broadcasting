@@ -12,11 +12,11 @@ export default ({ setMessage, onSend }: any) => {
 	}
 
 	const handleMic = () => {
-		console.log('recording audio...')
+		console.info('recording audio...')
 	}
 	
 	const handleUpload = () => {
-		console.log('opening file explorer...')
+		console.info('opening file explorer...')
 	}
 
 	return (
